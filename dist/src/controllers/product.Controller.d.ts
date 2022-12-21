@@ -4,5 +4,4 @@ export declare class ProductCTL {
     static delete(req: any, res: any): Promise<void>;
     static formUpdate(req: any, res: any): Promise<void>;
     static update(req: any, res: any): Promise<void>;
-    static search(req: any, res: any): Promise<void>;
 }

@@ -20,7 +20,7 @@ export class ProductCTL {
                 const product = await productNew.save();
                 if (product) {
                     //thêm chuyển qua list và thêm message success
-                    res.redirect('/products/product/list');
+                    res.redirect('/admin/product/list');
                 }
                 else {
                     //thêm chuyển qua list và thêm message error
@@ -42,7 +42,7 @@ export class ProductCTL {
             let products = await ProductModel.find();
             if (products) {
                 console.log(products);
-                res.render('listProductDemo', {products: products});
+                res.render('products/productList', {products: products});
             }
         }catch (err) {
             // đưa về view 500
@@ -51,6 +51,7 @@ export class ProductCTL {
         }
     }
 
+
     static async delete(req, res) {
         console.log(req.params.id)
         try {
@@ -58,7 +59,7 @@ export class ProductCTL {
             if (product) {
                 await product.remove();
                 //thêm chuyển qua list và thêm message success
-                res.redirect('/products/product/list')
+                res.redirect('/admin/product/list')
             }
             else {
                 //thêm chuyển qua list và thêm message err
@@ -76,7 +77,7 @@ export class ProductCTL {
         try {
             let product = await ProductModel.findOne({_id: req.params.id});
             if (product) {
-                res.render('updateDemo', {product: product})
+                res.render('products/productUpdate', {product: product})
             }
             else {
                 res.send('error: product does not exist')
@@ -103,7 +104,7 @@ export class ProductCTL {
                 product.producer = req.body.producer;
                 await product.save();
                 if (product) {
-                    res.redirect('/products/product/list')
+                    res.redirect('/admin/product/list')
                 }else {
                     res.send("update err")
                 }
@@ -117,8 +118,8 @@ export class ProductCTL {
         }
     }
 
-    static async search(req,res) {
-
-    }
+    // static async search(req,res) {
+    //     console.log(req.url)
+    // }
 
 }

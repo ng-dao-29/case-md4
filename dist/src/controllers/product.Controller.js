@@ -20,7 +20,7 @@ class ProductCTL {
                 });
                 const product = await productNew.save();
                 if (product) {
-                    res.redirect('/products/product/list');
+                    res.redirect('/admin/product/list');
                 }
                 else {
                     res.send('create product error');
@@ -40,7 +40,7 @@ class ProductCTL {
             let products = await productModel_1.ProductModel.find();
             if (products) {
                 console.log(products);
-                res.render('listProductDemo', { products: products });
+                res.render('products/productList', { products: products });
             }
         }
         catch (err) {
@@ -54,7 +54,7 @@ class ProductCTL {
             let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
             if (product) {
                 await product.remove();
-                res.redirect('/products/product/list');
+                res.redirect('/admin/product/list');
             }
             else {
                 res.send('error: product does not exist');
@@ -70,7 +70,7 @@ class ProductCTL {
         try {
             let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
             if (product) {
-                res.render('updateDemo', { product: product });
+                res.render('products/productUpdate', { product: product });
             }
             else {
                 res.send('error: product does not exist');
@@ -96,7 +96,7 @@ class ProductCTL {
                 product.producer = req.body.producer;
                 await product.save();
                 if (product) {
-                    res.redirect('/products/product/list');
+                    res.redirect('/admin/product/list');
                 }
                 else {
                     res.send("update err");
@@ -109,8 +109,6 @@ class ProductCTL {
         catch (err) {
             res.send('error: ' + err.message);
         }
-    }
-    static async search(req, res) {
     }
 }
 exports.ProductCTL = ProductCTL;

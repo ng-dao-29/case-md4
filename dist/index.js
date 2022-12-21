@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose = __importStar(require("mongoose"));
+const routerProduct_1 = __importDefault(require("./src/router/admin/routerProduct"));
 mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
@@ -40,6 +41,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
 app.use(body_parser_1.default.json());
+app.use('/admin/product', routerProduct_1.default);
 app.get('/admin/dashboard', (req, res) => {
     res.render('admin/home');
 });

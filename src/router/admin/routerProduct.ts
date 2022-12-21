@@ -1,8 +1,10 @@
 import {Router} from "express";
-import {ProductCTL} from "../controllers/product.Controller";
+import {ProductCTL} from "../../controllers/product.Controller";
 import multer from "multer";
+import express from "express";
+
 import passport from "passport";
-const routerAdmin = Router();
+const routerProduct = Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -13,30 +15,37 @@ const storage = multer.diskStorage({
         cb(null, file.originalname) //+ '-' + uniqueSuffix)
     }
 })
+
 const upload = multer({ storage: storage })
 
-routerAdmin.get('/product/create', (req, res) => {
-    res.render('createProductTest');
+routerProduct.get('/create', (req, res) => {
+    res.render('products/productCreate');
 })
 
-routerAdmin.post('/product/create', upload.single("picture"),(req, res) => {
+routerProduct.post('/create', upload.single("picture"),(req, res) => {
     ProductCTL.create(req, res).catch(err => {err.message})
 })
 
-routerAdmin.get('/product/list', (req, res) => {
+routerProduct.get('/list', (req, res) => {
     ProductCTL.list(req, res).catch(err => {err.message})
 })
 
-routerAdmin.get('/product/delete/:id', (req, res) => {
+routerProduct.get('/delete/:id', (req, res) => {
     ProductCTL.delete(req,res).catch(err => console.log(err.message));
 })
 
-routerAdmin.get('/product/update/:id', (req, res) => {
+routerProduct.get('/update/:id', (req, res) => {
     ProductCTL.formUpdate(req,res).catch(err => console.log(err.message));
 })
 
-routerAdmin.post('/product/update/:id', upload.single("picture"), (req, res) => {
+routerProduct.post('/update/:id', upload.single("picture"), (req, res) => {
     ProductCTL.update(req, res).catch(err => console.log(err.message));
 })
 
-export default routerAdmin;
+// routerProduct.get('/search',(req, res) => {
+//     ProductCTL.search(req, res).catch()
+// })
+
+routerProduct.post('/')
+
+export default routerProduct;
