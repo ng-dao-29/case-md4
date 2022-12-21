@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test create</title>
+</head>
+<body>
+<!--name: string;//tên-->
+<!--price: number;//giá bán-->
+<!--category: string;//loại hàng-->
+<!--description: string;// mô tả-->
+<!--picture: string; //ảnh-->
+<!--quantity: number;//số lượng-->
+<!--producer: string;// nhà sản xuất-->
+<form action="/admin/product/create" method="post" enctype="multipart/form-data">
+  <table>
+    <tr>
+      <td>tên</td>
+      <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+      <td>giá</td>
+      <td><input type="text" name="price"></td>
+    </tr>
+    <tr>
+      <td>loại hàng</td>
+      <td><input type="text" name="category"></td>
+    </tr>
+    <tr>
+      <td>mo tả</td>
+      <td><input type="text" name="description"></td>
+    </tr>
+    <tr>
+      <td>ảnh</td>
+      <td><input type="file" name="picture"></td>
+    </tr>
+    <tr>
+      <td>số lượng</td>
+      <td><input type="number" name="quantity"></td>
+    </tr>
+    <tr>
+      <td>nhà sản xuất</td>
+      <td><input type="text" name="producer"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
