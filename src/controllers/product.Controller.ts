@@ -5,6 +5,7 @@ export class ProductCTL {
     static async create(req,res) {
         console.log(req.file.originalname);
         console.log(req.body)
+        console.log(req)
         try {
             let  productNew = await ProductModel.findOne({name: req.body.name});
             if (!productNew) {

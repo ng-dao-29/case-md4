@@ -4,21 +4,26 @@ interface IUser {
     username: string;
     password: string;
     role: string;
-    email: string;
     name: string;
+    email: string;
+    gender: string;
+    avatar: string;
     address: string;
     phone: number;
-    order: [string];
+    dateOfBirth: Date;
 }
 
 const userSchema = new Schema<IUser>({
     username: {type: String, required: true},
     password: {type: String, required: true},
-    role: {type: String, required: true, default: "user"},
-    name: {type: String, required: true},
-    email: {type: String, required: true},
-    address: {type: String, required: true},
-    phone: {type: Number, required: true},
+    role: {type: String, required: false, default: "user"},
+    name: {type: String, required: false},
+    email: {type: String, required: false},
+    gender: {type: String, required: false},
+    avatar: {type: String, required: false},
+    address: {type: String, required: false},
+    phone: {type: Number, required: false},
+    dateOfBirth: {type: Date, required: false}
 })
 
 const UserModel = model<IUser>('User', userSchema);

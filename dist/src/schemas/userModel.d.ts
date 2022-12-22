@@ -27,11 +27,13 @@ interface IUser {
     username: string;
     password: string;
     role: string;
-    email: string;
     name: string;
+    email: string;
+    gender: string;
+    avatar: string;
     address: string;
     phone: number;
-    order: [string];
+    dateOfBirth: Date;
 }
 declare const UserModel: import("mongoose").Model<IUser, {}, {}, {}, any>;
 export { UserModel };
