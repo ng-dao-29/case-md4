@@ -29,7 +29,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose = __importStar(require("mongoose"));
+const routerAuth_1 = __importDefault(require("./src/router/auth/routerAuth"));
 const routerProduct_1 = __importDefault(require("./src/router/admin/routerProduct"));
+const connect_flash_1 = __importDefault(require("connect-flash"));
+const express_session_1 = __importDefault(require("express-session"));
+const authPassport_1 = __importDefault(require("./src/middleware/authPassport"));
+const checkOut_1 = require("./src/middleware/checkOut");
 mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
@@ -41,6 +46,17 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
 app.use(body_parser_1.default.json());
+app.use((0, connect_flash_1.default)());
+app.use((0, express_session_1.default)({
+    secret: 'SECRET',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
+app.use(authPassport_1.default.initialize());
+app.use(authPassport_1.default.session());
+app.use('/auth', routerAuth_1.default);
+app.use(checkOut_1.CheckOut.checkOut);
 app.use('/admin/product', routerProduct_1.default);
 app.get('/admin/dashboard', (req, res) => {
     res.render('admin/home');

@@ -1,8 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import * as mongoose from "mongoose";
-import routerAuth from "./src/router/routerAuth";
+import routerAuth from "./src/router/auth/routerAuth";
 import routerProduct from "./src/router/admin/routerProduct";
+import flash from "connect-flash"
+import session from "express-session"
+import passport from './src/middleware/authPassport'
+import {CheckOut} from "./src/middleware/checkOut";
 mongoose.set('strictQuery', true);
 
 const port = 3000;
@@ -16,15 +20,25 @@ mongoose.connect(DB_URL)
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static( 'public'));
-
 app.use(bodyParser.json());
-// app.use('/auth',routerAuth);
+app.use(flash())
+app.use(session({
+    secret: 'SECRET',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 60 * 60 * 1000}
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth',routerAuth);
+app.use(CheckOut.checkOut)
 app.use('/admin/product',routerProduct);
 
 app.get('/admin/dashboard', (req, res) => {
     res.render('admin/home')
 })
-
 
 app.listen(port, () => {
     console.log("app running on port: " + port)
