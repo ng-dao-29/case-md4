@@ -160,7 +160,7 @@ function getSupportsPassive() {
                 supportsPassive = true;
             }
         });
-        // @ts-ignore
+        // @js-ignore
         window.addEventListener("test", null, opts);
     }
     catch (e) { }

@@ -27,21 +27,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const body_parser_1 = __importDefault(require("body-parser"));
+const bodyParser = require("body-parser");
 const mongoose = __importStar(require("mongoose"));
 const routerProduct_1 = __importDefault(require("./src/router/admin/routerProduct"));
-mongoose.set('strictQuery', true);
+const flash = require('connect-flash');
+const session = require('express-session');
 const port = 3000;
 const app = (0, express_1.default)();
-const DB_URL = 'mongodb://127.0.0.1:27017/case_md4';
+const DB_URL = 'mongodb+srv://kenshin:hoangdaica121@cluster0.am5uqky.mongodb.net/ecommerce';
+mongoose.set('strictQuery', true);
 mongoose.connect(DB_URL)
     .then(() => console.log("database ok"))
     .catch(err => console.log("database error: " + err.message));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
-app.use(body_parser_1.default.json());
-app.use('/admin/product', routerProduct_1.default);
+app.use(flash());
+app.use(session({
+    cookie: { maxAge: 60000 },
+    secret: 'woot',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(bodyParser.json());
+app.use('/admin/products', routerProduct_1.default);
 app.get('/admin/dashboard', (req, res) => {
     res.render('admin/home');
 });

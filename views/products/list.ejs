@@ -3,52 +3,15 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!-- Primary Meta Tags -->
-    <title>Volt Premium Bootstrap Dashboard - Forms</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content="Volt Premium Bootstrap Dashboard - Forms">
-    <meta name="author" content="Themesberg">
-    <meta name="description"
-          content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
-    <meta name="keywords"
-          content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard"/>
-    <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://demo.themesberg.com/volt-pro">
-    <meta property="og:title" content="Volt Premium Bootstrap Dashboard - Forms">
-    <meta property="og:description"
-          content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
-    <meta property="og:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://demo.themesberg.com/volt-pro">
-    <meta property="twitter:title" content="Volt Premium Bootstrap Dashboard - Forms">
-    <meta property="twitter:description"
-          content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
-    <meta property="twitter:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
 
     <!-- Sweet Alert -->
-    <link type="text/css" href="../../vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link type="text/css" href="/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- Notyf -->
-    <link type="text/css" href="../../vendor/notyf/notyf.min.css" rel="stylesheet">
+    <link type="text/css" href="/vendor/notyf/notyf.min.css" rel="stylesheet">
 
     <!-- Volt CSS -->
-    <link type="text/css" href="../../css/volt.css" rel="stylesheet">
+    <link type="text/css" href="/css/volt.css" rel="stylesheet">
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
@@ -75,8 +38,8 @@
 
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
     <div class="sidebar-inner px-4 pt-3">
-        <%- include('../ navigationBar/topBar')%>
-        <%- include('../ navigationBar/ LeftBar')%>
+        <%- include('../navigationBar/topBar')%>
+        <%- include('../navigationBar/LeftBar')%>
     </div>
 </nav>
 
@@ -87,7 +50,7 @@
             <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
                 <div class="d-flex align-items-center">
                     <!-- Search form -->
-                    <form class="navbar-search form-inline" id="navbar-search-main" enctype="multipart/form-data">
+                    <form class="navbar-search form-inline" id="navbar-search-main">
                         <div class="input-group input-group-merge search-bar">
               <span class="input-group-text" id="topbar-addon">
                 <svg class="icon icon-xs" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg"
@@ -304,88 +267,88 @@
         </div>
     </nav>
 
-    <%- include('../ navigationBar/quickPick')%>
-
-    <div class="d-flex justify-content-between w-100 flex-wrap">
-        <div class="mb-3 mb-lg-0">
-            <h1 class="h4">New Product</h1>
-            <p class="mb-0"></p>
-        </div>
-        <!--            <div>-->
-        <!--                <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/forms/"-->
-        <!--                   class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Forms Docs</a>-->
-        <!--            </div>-->
-    </div>
 
     <div class="row">
-        <form action="/admin/product/create" method="post" enctype="multipart/form-data">
-            <div class="col-12 mb-4">
-                <div class="card border-0 shadow components-section">
-                    <div class="card-body">
-                        <div class="row mb-4">
-                            <div class="col-lg-4 col-sm-6">
-                                <!-- Form -->
-                                <div class="mb-4">
-                                    <label for="firstName">Product's name</label>
-                                    <input type="text" class="form-control" id="name" aria-describedby="" name="name">
-                                    <small id="" class="form-text text-muted"></small>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow">
+
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                   <h2 style="">List Product</h2>
+                                    <a class="btn btn-sm btn-success" href="/admin/products/create">Create</a>
                                 </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <div class="mb-3">
-                                    <label for="exampleInputIconLeft">Picture</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="exampleInputIconLeft"
-                                               name="picture">
-                                    </div>
-                                </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <div class="mb-3">
-                                    <label for="exampleInputIconRight">price</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="exampleInputIconRight"
-                                               name="price">
-                                    </div>
-                                </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <div class="mb-3">
-                                    <label for="exampleInputIconPassword">category</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="exampleInputIconPassword"
-                                               name="category">
-                                    </div>
-                                </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <div class="mb-3">
-                                    <label for="firstName">Producer</label>
-                                    <input type="text" class="form-control" id="firstName" name="producer">
-                                </div>
-                                <!-- End of Form -->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="mb-4">
-                                    <label for="firstName">quantity</label>
-                                    <input type="number" class="form-control" id="firstName" name="quantity">
-                                </div>
-                                <!-- Form -->
-                                <div class="my-4">
-                                    <label for="textarea">Description</label>
-                                    <textarea class="form-control" placeholder="Enter your message..." id="textarea"
-                                              rows="4" name="description"></textarea>
-                                </div>
-                                <!-- End of Form -->
-                                <!-- Form -->
-                                <!-- End of Form -->
                             </div>
                         </div>
-                        <button class="btn btn-lg btn-primary" type="submit">add</button>
+
+                        <div class="card-header">
+                            <form class="row align-items-center"  action="/admin/product/search">
+                                <div class="col">
+                                    <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <svg class="icon icon-xs text-gray-600" fill="currentColor"
+                                                     viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                            </span>
+                                        <input type="text" onkeyup="searchProduct(this.value)" class="form-control" id="exampleInputIconLeft"
+                                               placeholder="Search product,Category,Producer" aria-label="Search">
+                                    </div>
+                                </div>
+
+                                <div class="col text-end">
+                                    <button class="btn btn-sm btn-primary">Search</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th class="border-bottom" scope="col">Stt</th>
+                                    <th class="border-bottom" scope="col">picture</th>
+                                    <th class="border-bottom" scope="col">Name</th>
+                                    <th class="border-bottom" scope="col">Price</th>
+                                    <th class="border-bottom" scope="col">Category</th>
+                                    <th class="border-bottom" scope="col">Quantity</th>
+                                    <th class="border-bottom" scope="col">Description</th>
+                                    <th class="border-bottom" scope="col">Producer</th>
+                                    <th class="border-bottom" scope="col">make a choice</th>
+                                </tr>
+                                </thead>
+                                <tbody id="list-product">
+                                <% if (products.length === 0) {%>
+                                    <th class="text-gray-900" scope="row">
+                                        no product
+                                    </th>
+                                <% } else {%>
+                                    <% products.forEach((product,index) => {%>
+                                        <tr>
+                                        <td class="class=fw-bolder text-gray-500"><%= index +1%></td>
+                                            <td><img style="width: 100px" src="/upload/<%= product.picture %>" alt=""></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.name%></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.price%></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.category%></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.quantity%></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.description%></td>
+                                        <td class="class=fw-bolder text-gray-500"><%= product.producer%></td>
+                                        <td>
+                                            <a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/delete/<%= product._id %>"><button  class="btn btn-outline-danger" type="button">delete</button></a>
+                                            <a href="/admin/product/update/<%= product._id %>"><button class="btn btn-outline-success" type="button">update</button></a>
+                                        </td>
+                                        </tr>
+                                    <%})%>
+                                <%}%>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="card theme-settings bg-gray-800 theme-settings-expand" id="theme-settings-expand">
@@ -404,8 +367,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
                 <p class="mb-0 text-center text-lg-start">© 2019-<span class="current-year"></span> <a
-                            class="text-primary fw-normal" href="https://themesberg.com" target="_blank">Themesberg</a>
-                </p>
+                            class="text-primary fw-normal" href="https://themesberg.com" target="_blank">Themesberg</a></p>
             </div>
             <div class="col-12 col-md-8 col-xl-6 text-center text-lg-start">
                 <!-- List -->
@@ -429,47 +391,47 @@
 </main>
 
 <!-- Core -->
-<script src="../../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="../../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- Vendor JS -->
-<script src="../../vendor/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="/vendor/onscreen/dist/on-screen.umd.min.js"></script>
 
 <!-- Slider -->
-<script src="../../vendor/nouislider/distribute/nouislider.min.js"></script>
+<script src="/vendor/nouislider/distribute/nouislider.min.js"></script>
 
 <!-- Smooth scroll -->
-<script src="../../vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
 
 <!-- Charts -->
-<script src="../../vendor/chartist/dist/chartist.min.js"></script>
-<script src="../../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="/vendor/chartist/dist/chartist.min.js"></script>
+<script src="/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
 
 <!-- Datepicker -->
-<script src="../../vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+<script src="/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
 
 <!-- Sweet Alerts 2 -->
-<script src="../../vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 <!-- Moment JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <!-- Vanilla JS Datepicker -->
-<script src="../../vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+<script src="/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
 
 <!-- Notyf -->
-<script src="../../vendor/notyf/notyf.min.js"></script>
+<script src="/vendor/notyf/notyf.min.js"></script>
 
 <!-- Simplebar -->
-<script src="../../vendor/simplebar/dist/simplebar.min.js"></script>
+<script src="/vendor/simplebar/dist/simplebar.min.js"></script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <!-- Volt JS -->
-<script src="../../assets/js/volt.js"></script>
-
-
+<script src="/assets/js/volt.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+<script src="/js/myts.js"></script>
 </body>
 
 </html>

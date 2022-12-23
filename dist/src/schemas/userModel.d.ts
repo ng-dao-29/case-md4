@@ -23,6 +23,7 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
+import { IProduct } from "./productModel";
 interface IUser {
     username: string;
     password: string;
@@ -32,6 +33,7 @@ interface IUser {
     address: string;
     phone: number;
     order: [string];
+    carts: IProduct[];
 }
 declare const UserModel: import("mongoose").Model<IUser, {}, {}, {}, any>;
 export { UserModel };

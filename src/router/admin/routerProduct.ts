@@ -1,51 +1,54 @@
 import {Router} from "express";
-import {ProductCTL} from "../../controllers/product.Controller";
-import multer from "multer";
-import express from "express";
+import {ProductController} from "../../controllers/product.controller";
 
-import passport from "passport";
+const multer = require("multer");
+const path = require("path");
+
 const routerProduct = Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        console.log(path.join(__dirname, '/public/upload'))
         cb(null, './public/upload')
     },
     filename: function (req, file, cb) {
-        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.originalname) //+ '-' + uniqueSuffix)
+        cb(null, file.originalname)
     }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({storage: storage})
 
-routerProduct.get('/create', (req, res) => {
-    res.render('products/productCreate');
+routerProduct.get('/create', ProductController.showFromCreate);
+
+routerProduct.post('/create', upload.single("picture"), (req, res) => {
+    ProductController.create(req, res).catch(err => {
+        err.message
+    })
 })
 
-routerProduct.post('/create', upload.single("picture"),(req, res) => {
-    ProductCTL.create(req, res).catch(err => {err.message})
+routerProduct.get('/', (req, res) => {
+    ProductController.list(req, res).catch(err => {
+        err.message
+    })
 })
 
-routerProduct.get('/list', (req, res) => {
-    ProductCTL.list(req, res).catch(err => {err.message})
+routerProduct.get('/:id/delete', (req, res) => {
+    ProductController.delete(req, res).catch(err => console.log(err.message));
 })
 
-routerProduct.get('/delete/:id', (req, res) => {
-    ProductCTL.delete(req,res).catch(err => console.log(err.message));
+routerProduct.get('/:id/update', (req, res) => {
+    ProductController.formUpdate(req, res).catch(err => console.log(err.message));
 })
 
-routerProduct.get('/update/:id', (req, res) => {
-    ProductCTL.formUpdate(req,res).catch(err => console.log(err.message));
+routerProduct.post('/:id/update', upload.single("picture"), (req, res) => {
+    ProductController.update(req, res).catch(err => console.log(err.message));
 })
-
-routerProduct.post('/update/:id', upload.single("picture"), (req, res) => {
-    ProductCTL.update(req, res).catch(err => console.log(err.message));
-})
-
-// routerProduct.get('/search',(req, res) => {
-//     ProductCTL.search(req, res).catch()
-// })
+routerProduct.get('/search', ProductController.search);
 
 routerProduct.post('/')
+
+routerProduct.post('/addToCart', (req, res) => {
+    ProductController.addToCart(req, res).catch(err => console.log(err.message));
+})
 
 export default routerProduct;

@@ -1,46 +1,56 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductCTL = void 0;
-const productModel_1 = require("../schemas/productModel");
-class ProductCTL {
+exports.ProductController = void 0;
+const productModel_1 = __importDefault(require("../schemas/productModel"));
+const userModel_1 = require("../schemas/userModel");
+class ProductController {
+    static async showFromCreate(req, res, next) {
+        try {
+            let errors = req.flash('errors');
+            console.log(errors);
+            res.render('products/create', {
+                errors: errors
+            });
+        }
+        catch (e) {
+            next(e);
+        }
+    }
     static async create(req, res) {
-        console.log(req.file.originalname);
         console.log(req.body);
         try {
-            let productNew = await productModel_1.ProductModel.findOne({ name: req.body.name });
-            if (!productNew) {
-                productNew = new productModel_1.ProductModel({
-                    name: req.body.name,
-                    price: req.body.price,
-                    category: req.body.category,
-                    description: req.body.description,
-                    picture: req.file.originalname,
-                    quantity: req.body.quantity,
-                    producer: req.body.producer
-                });
-                const product = await productNew.save();
-                if (product) {
-                    res.redirect('/admin/product/list');
-                }
-                else {
-                    res.send('create product error');
-                }
-            }
-            else {
-                res.send('product already exists');
-            }
+            let productNew = new productModel_1.default({
+                name: req.body.name,
+                price: req.body.price,
+                category: req.body.category,
+                description: req.body.description,
+                picture: 'dfdsfdsf',
+                quantity: req.body.quantity,
+                producer: req.body.producer
+            });
+            await productNew.save();
+            res.redirect('/admin/products');
         }
-        catch (err) {
-            console.log(err.message);
-            res.send('500');
+        catch (e) {
+            let messageValidation = {
+                name: e.errors['name'].message,
+                price: e.errors['price'].message,
+                category: e.errors['category'].message
+            };
+            console.log(messageValidation);
+            req.flash('errors', messageValidation);
+            res.redirect('/admin/products/create');
         }
     }
     static async list(req, res) {
         try {
-            let products = await productModel_1.ProductModel.find();
+            let products = await productModel_1.default.find();
             if (products) {
                 console.log(products);
-                res.render('products/productList', { products: products });
+                res.render('products/list', { products: products });
             }
         }
         catch (err) {
@@ -51,7 +61,7 @@ class ProductCTL {
     static async delete(req, res) {
         console.log(req.params.id);
         try {
-            let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
+            let product = await productModel_1.default.findOne({ _id: req.params.id });
             if (product) {
                 await product.remove();
                 res.redirect('/admin/product/list');
@@ -68,7 +78,7 @@ class ProductCTL {
     static async formUpdate(req, res) {
         console.log(req.params.id);
         try {
-            let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
+            let product = await productModel_1.default.findOne({ _id: req.params.id });
             if (product) {
                 res.render('products/productUpdate', { product: product });
             }
@@ -85,7 +95,7 @@ class ProductCTL {
         console.log(req.params.id);
         console.log(req.fresh.originalname);
         try {
-            let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
+            let product = await productModel_1.default.findOne({ _id: req.params.id });
             if (product) {
                 product.name = req.body.name;
                 product.price = req.body.price;
@@ -110,6 +120,43 @@ class ProductCTL {
             res.send('error: ' + err.message);
         }
     }
+    static async search(req, res, next) {
+        try {
+            let products = await productModel_1.default.find({
+                name: { $regex: req.query.keyword, $options: 'i' }
+            });
+            res.status(200).json(products);
+        }
+        catch (e) {
+            res.json({
+                'error': e.message
+            });
+        }
+    }
+    static async addToCart(req, res) {
+        const { productId } = req.body;
+        try {
+            let product = await productModel_1.default.findOne({
+                _id: productId
+            });
+            if (product) {
+                const newUser = new userModel_1.UserModel({});
+                newUser.carts.push(product);
+                await newUser.save();
+            }
+            else {
+                res.status(400).json({
+                    'error': 'Cant find product'
+                });
+            }
+            res.status(200).json();
+        }
+        catch (e) {
+            res.json({
+                'error': e.message
+            });
+        }
+    }
 }
-exports.ProductCTL = ProductCTL;
-//# sourceMappingURL=product.Controller.js.map
+exports.ProductController = ProductController;
+//# sourceMappingURL=product.controller.js.map
