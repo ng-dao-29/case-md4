@@ -20,8 +20,6 @@
 <body>
 
 <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
-
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
     <a class="navbar-brand me-lg-5" href="../../index.html">
         <img class="navbar-brand-dark" src="../../assets/img/brand/light.svg" alt="Volt logo"/> <img
@@ -55,22 +53,21 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                   <h2 style="text-align: right">List Product</h2>
-                                </div>
-                                <div class="col text-end">
+                                    <h2 style="">List Product</h2>
+                                    <a class="btn btn-sm btn-success" href="/admin/products/create">Create</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-header">
-                            <form class="row align-items-center" method="get" action="/admin/product/search">
+                            <form class="row align-items-center"  action="/admin/product/search">
                                 <div class="col">
                                     <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <svg class="icon icon-xs text-gray-600" fill="currentColor"
                                                      viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                                             </span>
-                                        <input type="text" class="form-control" id="exampleInputIconLeft"
+                                        <input type="text" onkeyup="searchProduct(this.value)" class="form-control" id="exampleInputIconLeft"
                                                placeholder="Search product,Category,Producer" aria-label="Search">
                                     </div>
                                 </div>
@@ -83,6 +80,7 @@
                         </div>
 
                         <div class="table-responsive">
+
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
@@ -97,7 +95,7 @@
                                     <th class="border-bottom" scope="col">make a choice</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="list-product">
                                 <% if (products.length === 0) {%>
                                     <th class="text-gray-900" scope="row">
                                         no product
@@ -105,18 +103,18 @@
                                 <% } else {%>
                                     <% products.forEach((product,index) => {%>
                                         <tr>
-                                        <td class="class=fw-bolder text-gray-500"><%= index +1%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= index +1%></td>
                                             <td><img style="width: 100px" src="/upload/<%= product.picture %>" alt=""></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.name%></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.price%></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.category%></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.quantity%></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.description%></td>
-                                        <td class="class=fw-bolder text-gray-500"><%= product.producer%></td>
-                                        <td>
-                                            <a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/delete/<%= product._id %>"><button  class="btn btn-outline-danger" type="button">delete</button></a>
-                                            <a href="/admin/product/update/<%= product._id %>"><button class="btn btn-outline-success" type="button">update</button></a>
-                                        </td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.name%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.price%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.category%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.quantity%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.description%></td>
+                                            <td class="class=fw-bolder text-gray-500"><%= product.producer%></td>
+                                            <td>
+                                                <a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/<%= product._id %>/delete"><button  class="btn btn-outline-danger" type="button">delete</button></a>
+                                                <a href="/admin/product/<%= product._id %>/update"><button class="btn btn-outline-success" type="button">update</button></a>
+                                            </td>
                                         </tr>
                                     <%})%>
                                 <%}%>

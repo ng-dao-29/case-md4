@@ -2,7 +2,7 @@
 //     if (req.isAuthenticated()) {
 //         return next();
 //     } else {
-//         return res.redirect('/admin/login');
+//         return res.redirect('/product/login');
 //     }
 // }
 // module.exports = checkAuth;

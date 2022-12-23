@@ -24,4 +24,5 @@ passport.use('local', new LocalStrategy(async (username, password, done) => {
         }
     }
 }));
+
 export default passport;

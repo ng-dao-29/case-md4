@@ -1,7 +1,7 @@
 import {Router} from "express";
 import multer from "multer";
-import {Auth} from "../../controllers/auth.Controller";
-import passport from "../../middleware/authPassport";
+import {Auth} from "../controllers/auth";
+import passport from "../middleware/authPassport";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -19,7 +19,7 @@ const routerAuth = Router();
 
 routerAuth.get('/login', Auth.formLogin)
 routerAuth.post('/login', [upload.none(),  passport.authenticate('local', {
-    successRedirect: '/admin/dashboard',
+    successRedirect: '/admin/dashboard/home',
     failureRedirect: '/auth/login'
 })]);
 
