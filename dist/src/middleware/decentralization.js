@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.decentralization = void 0;
 const decentralization = async (req, res, next) => {
     let user = req.decoded;
-    if (user.role === 'admin') {
+    if (user.role === 'product') {
         next();
     }
     else {

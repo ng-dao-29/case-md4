@@ -35,4 +35,4 @@ routerProduct.post('/product/update/:id', upload.single("picture"), (req, res) =
     product_Controller_1.ProductCTL.update(req, res).catch(err => console.log(err.message));
 });
 exports.default = routerProduct;
-//# sourceMappingURL=routerProduct.js.map
+//# sourceMappingURL=products.js.map

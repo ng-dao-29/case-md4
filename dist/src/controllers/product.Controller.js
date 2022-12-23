@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductCTL = void 0;
 const productModel_1 = require("../schemas/productModel");
 class ProductCTL {
+    static formCreate(req, res) {
+        res.render('products/create');
+    }
     static async create(req, res) {
         console.log(req.file.originalname);
         console.log(req.body);
@@ -41,7 +44,7 @@ class ProductCTL {
             let products = await productModel_1.ProductModel.find();
             if (products) {
                 console.log(products);
-                res.render('products/productList', { products: products });
+                res.render('products/list', { products: products });
             }
         }
         catch (err) {
@@ -71,7 +74,7 @@ class ProductCTL {
         try {
             let product = await productModel_1.ProductModel.findOne({ _id: req.params.id });
             if (product) {
-                res.render('products/productUpdate', { product: product });
+                res.render('products/update', { product: product });
             }
             else {
                 res.send('error: product does not exist');

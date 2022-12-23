@@ -19,7 +19,7 @@ const upload = (0, multer_1.default)({ storage: storage });
 const routerAuth = (0, express_1.Router)();
 routerAuth.get('/login', auth_Controller_1.Auth.formLogin);
 routerAuth.post('/login', [upload.none(), authPassport_1.default.authenticate('local', {
-        successRedirect: '/admin/dashboard',
+        successRedirect: '/product/dashboard/home',
         failureRedirect: '/auth/login'
     })]);
 routerAuth.get('/register', auth_Controller_1.Auth.formRegister);

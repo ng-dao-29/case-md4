@@ -33,7 +33,7 @@ interface IUser {
     avatar: string;
     address: string;
     phone: number;
-    dateOfBirth: Date;
+    birthday: string;
 }
 declare const UserModel: import("mongoose").Model<IUser, {}, {}, {}, any>;
 export { UserModel };

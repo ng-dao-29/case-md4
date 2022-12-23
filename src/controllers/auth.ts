@@ -30,8 +30,8 @@ export class Auth {
     //                 expiresIn: 36000,
     //             });
     //             // res.json({token: token, code: 200});
-    //             if (user.role === 'admin') {
-    //                 res.redirect('/admin/dashboard',{token: token});
+    //             if (user.role === 'product') {
+    //                 res.redirect('/product/dashboard',{token: token});
     //             }
     //         }
     //     }catch (err) {

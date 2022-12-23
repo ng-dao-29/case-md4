@@ -29,12 +29,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose = __importStar(require("mongoose"));
-const routerAuth_1 = __importDefault(require("./src/router/auth/routerAuth"));
-const routerProduct_1 = __importDefault(require("./src/router/admin/routerProduct"));
+const auth_1 = __importDefault(require("./src/router/auth"));
+const products_1 = __importDefault(require("./src/router/products"));
 const connect_flash_1 = __importDefault(require("connect-flash"));
 const express_session_1 = __importDefault(require("express-session"));
 const authPassport_1 = __importDefault(require("./src/middleware/authPassport"));
 const checkOut_1 = require("./src/middleware/checkOut");
+const dashboard_1 = __importDefault(require("./src/router/dashboard"));
+const error_1 = __importDefault(require("./src/router/error"));
 mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
@@ -55,12 +57,11 @@ app.use((0, express_session_1.default)({
 }));
 app.use(authPassport_1.default.initialize());
 app.use(authPassport_1.default.session());
-app.use('/auth', routerAuth_1.default);
+app.use('/auth', auth_1.default);
 app.use(checkOut_1.CheckOut.checkOut);
-app.use('/admin/product', routerProduct_1.default);
-app.get('/admin/dashboard', (req, res) => {
-    res.render('admin/home');
-});
+app.use('/admin/product', products_1.default);
+app.use('/admin/dashboard', dashboard_1.default);
+app.use('/error', error_1.default);
 app.listen(port, () => {
     console.log("app running on port: " + port);
 });
