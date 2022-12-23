@@ -11,6 +11,7 @@ interface IUser {
     avatar: string;
     address: string;
     phone: number;
+    gender: string;
     order: [string];
     carts: IProduct[];
     birthday: string;
@@ -38,7 +39,7 @@ const userSchema = new Schema<IUser>({
     avatar:{
         type: String,
         required: false,
-        default: 'avatar-default',
+        default: 'avatar-default.jpg',
     },
     email: {
         type: String,
@@ -50,6 +51,10 @@ const userSchema = new Schema<IUser>({
     },
     phone: {
         type: Number,
+        required: false
+    },
+    gender: {
+        type: String,
         required: false
     },
     carts: [{type: Schema.Types.ObjectId, ref: 'Product'}],
