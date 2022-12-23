@@ -30,11 +30,13 @@ const productSchema = new Schema<IProduct>({
     },
     picture: {
         type: String,
-        // required: [true, 'picture must be entered']
+        required: true,
+
     },
     quantity: {
         type: Number,
-        required: false, default: 0
+        required: false,
+        default: 0
     },
     producer: {
         type: String,

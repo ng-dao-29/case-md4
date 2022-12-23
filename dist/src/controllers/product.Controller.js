@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 exports.ProductController = void 0;
 const productModel_1 = __importDefault(require("../schemas/productModel"));
 const userModel_1 = require("../schemas/userModel");
@@ -18,9 +19,17 @@ class ProductController {
         catch (e) {
             next(e);
         }
+=======
+exports.ProductCTL = void 0;
+const productModel_1 = require("../schemas/productModel");
+class ProductCTL {
+    static formCreate(req, res) {
+        res.render('products/create');
+>>>>>>> a48fd8d59a005c6ce405a27716f38cb708a2e494
     }
     static async create(req, res) {
         console.log(req.body);
+        console.log(req);
         try {
             let productNew = new productModel_1.default({
                 name: req.body.name,
@@ -80,7 +89,7 @@ class ProductController {
         try {
             let product = await productModel_1.default.findOne({ _id: req.params.id });
             if (product) {
-                res.render('products/productUpdate', { product: product });
+                res.render('products/update', { product: product });
             }
             else {
                 res.send('error: product does not exist');

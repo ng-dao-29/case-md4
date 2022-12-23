@@ -44,10 +44,12 @@ const productSchema = new mongoose_1.Schema({
     },
     picture: {
         type: String,
+        required: true,
     },
     quantity: {
         type: Number,
-        required: false, default: 0
+        required: false,
+        default: 0
     },
     producer: {
         type: String,

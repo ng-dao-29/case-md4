@@ -29,31 +29,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = require("body-parser");
 const mongoose = __importStar(require("mongoose"));
-const routerProduct_1 = __importDefault(require("./src/router/admin/routerProduct"));
 const flash = require('connect-flash');
-const session = require('express-session');
+const auth_1 = __importDefault(require("./src/router/auth"));
+const products_1 = __importDefault(require("./src/router/products"));
+const express_session_1 = __importDefault(require("express-session"));
+const authPassport_1 = __importDefault(require("./src/middleware/authPassport"));
+const checkOut_1 = require("./src/middleware/checkOut");
+const dashboard_1 = __importDefault(require("./src/router/dashboard"));
+const error_1 = __importDefault(require("./src/router/error"));
+mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
 const DB_URL = 'mongodb+srv://kenshin:hoangdaica121@cluster0.am5uqky.mongodb.net/ecommerce';
-mongoose.set('strictQuery', true);
 mongoose.connect(DB_URL)
     .then(() => console.log("database ok"))
     .catch(err => console.log("database error: " + err.message));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
-app.use(flash());
-app.use(session({
-    cookie: { maxAge: 60000 },
-    secret: 'woot',
-    resave: false,
-    saveUninitialized: false
-}));
 app.use(bodyParser.json());
-app.use('/admin/products', routerProduct_1.default);
-app.get('/admin/dashboard', (req, res) => {
-    res.render('admin/home');
-});
+app.use(flash());
+app.use((0, express_session_1.default)({
+    secret: 'SECRET',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600 * 60 * 1000 }
+}));
+app.use(authPassport_1.default.initialize());
+app.use(authPassport_1.default.session());
+app.use('/auth', auth_1.default);
+app.use(checkOut_1.CheckOut.checkOut);
+app.use('/admin/product', products_1.default);
+app.use('/admin/dashboard', dashboard_1.default);
+app.use('/error', error_1.default);
 app.listen(port, () => {
     console.log("app running on port: " + port);
 });

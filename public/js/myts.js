@@ -1,15 +1,15 @@
 // import axios from "express-session/session/memory";
-const addToCart = (productId) => {
-    console.log(productId)
-    axios.post('/admin/products/addToCart', {
-        productId
-    }).then(() => {
-        alert('Success')
-    })
-}
+// const addToCart = (productId) => {
+//     console.log(productId)
+//     axios.post('/admin/products/addToCart', {
+//         productId
+//     }).then(() => {
+//         alert('Success')
+//     })
+// }
 const searchProduct = (value) => {
 
-    axios.get('/admin/products/search', {
+    axios.get('/admin/product/search', {
         params: {
             keyword: value
         }
@@ -27,9 +27,9 @@ const searchProduct = (value) => {
             html += `<td>${product.quality}</td>`;
             html += `<td>${product.description}</td>`;
             html += `<td>${product.producer}</td>`;
-            html += `<td><a onclick="return confirm('Are you sure you want to delete this product?')" href="/admin/products/${product._id}/delete" class="btn btn-danger">Delete</a>
-            <button onClick="addToCart('${product._id}')">Add To Cart</button>
-            </td>`;
+            html += `<td><a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/<%= product._id %>/delete"><button  class="btn btn-outline-danger" type="button">delete</button></a>
+                     <a href="/admin/product/<%= product._id %>/update"><button class="btn btn-outline-success" type="button">update</button></a>
+                     </td>`;
             html += '</tr>';
         })
 

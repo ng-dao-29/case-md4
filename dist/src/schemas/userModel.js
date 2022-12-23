@@ -18,21 +18,30 @@ const userSchema = new mongoose_1.Schema({
     },
     name: {
         type: String,
-        required: true
+        required: false
+    },
+    avatar: {
+        type: String,
+        required: false,
+        default: 'avatar-default',
     },
     email: {
         type: String,
-        required: true
+        required: false
     },
     address: {
         type: String,
-        required: true
+        required: false
     },
     phone: {
         type: Number,
-        required: true
+        required: false
     },
-    carts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }]
+    carts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }],
+    birthday: {
+        type: String,
+        required: false
+    }
 });
 const UserModel = (0, mongoose_1.model)('User', userSchema);
 exports.UserModel = UserModel;

@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
+<<<<<<< HEAD
 const upload = multer({ storage: storage });
 routerProduct.get('/create', product_controller_1.ProductController.showFromCreate);
 routerProduct.post('/create', upload.single("picture"), (req, res) => {
@@ -40,5 +41,14 @@ routerProduct.post('/');
 routerProduct.post('/addToCart', (req, res) => {
     product_controller_1.ProductController.addToCart(req, res).catch(err => console.log(err.message));
 });
+=======
+const upload = (0, multer_1.default)({ storage: storage });
+routerProduct.get('/create', product_Controller_1.ProductCTL.formCreate);
+routerProduct.post('/create', upload.single("picture"), product_Controller_1.ProductCTL.create);
+routerProduct.get('/list', product_Controller_1.ProductCTL.list);
+routerProduct.get('/delete/:id', product_Controller_1.ProductCTL.delete);
+routerProduct.get('/update/:id', product_Controller_1.ProductCTL.formUpdate);
+routerProduct.post('/update/:id', upload.single("picture"), product_Controller_1.ProductCTL.update);
+>>>>>>> a48fd8d59a005c6ce405a27716f38cb708a2e494
 exports.default = routerProduct;
-//# sourceMappingURL=routerProduct.js.map
+//# sourceMappingURL=products.js.map

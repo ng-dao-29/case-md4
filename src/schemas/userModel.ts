@@ -8,10 +8,12 @@ interface IUser {
     role: string;
     email: string;
     name: string;
+    avatar: string;
     address: string;
     phone: number;
     order: [string];
-    carts: IProduct[]
+    carts: IProduct[];
+    birthday: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -30,21 +32,33 @@ const userSchema = new Schema<IUser>({
     },
     name: {
         type: String,
-        required: true
+
+        required: false
+    },
+    avatar:{
+        type: String,
+        required: false,
+        default: 'avatar-default',
     },
     email: {
         type: String,
-        required: true
+        required: false
     },
     address: {
         type: String,
-        required: true
+        required: false
     },
     phone: {
         type: Number,
-        required: true
+        required: false
     },
-    carts: [{type: Schema.Types.ObjectId, ref: 'Product'}]
+    carts: [{type: Schema.Types.ObjectId, ref: 'Product'}],
+
+    birthday: {
+        type: String,
+        required: false
+    }
+
 })
 
 const UserModel = model<IUser>('User', userSchema);

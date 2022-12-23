@@ -30,10 +30,12 @@ interface IUser {
     role: string;
     email: string;
     name: string;
+    avatar: string;
     address: string;
     phone: number;
     order: [string];
     carts: IProduct[];
+    birthday: string;
 }
 declare const UserModel: import("mongoose").Model<IUser, {}, {}, {}, any>;
 export { UserModel };
