@@ -1,12 +1,24 @@
-import {ProductModel} from "../schemas/productModel";
+import ProductModel from "../schemas/productModel";
+import {UserModel} from "../schemas/userModel";
+
 
 export class ProductController {
 
-    static showFormCreate(req, res) {
-        res.render('products/create')
+
+    static async showFromCreate(req, res, next) {
+        try {
+            let errors = req.flash('errors');
+            console.log(errors)
+            res.render('products/create', {
+                errors: errors
+            });
+        } catch (e) {
+            next(e)
+        }
     }
 
     static async create(req, res) {
+        console.log(req.body)
         try {
             let productNew = new ProductModel({
                 name: req.body.name,
@@ -17,25 +29,20 @@ export class ProductController {
                 quantity: req.body.quantity,
                 producer: req.body.producer
             });
-            const product = await productNew.save();
-            if (product) {
-                //thêm chuyển qua list và thêm message success
-                res.redirect('/admin/product/list');
-            } else {
-                // let messageValidation = {
-                //     name: e.errors['name'].message,
-                //     price: e.errors['price'].message,
-                //     // picture: e.errors['picture'].message,
-                //     category : e.errors['category'].message
-                //
-                // }
-                // console.log(messageValidation)
-                // req.flash('errors',messageValidation)
-                // res.redirect('/admin/products/create')
+            await productNew.save();
+            res.redirect('/admin/product/list')
+        } catch (e) {
+
+            let messageValidation = {
+                name: e.errors['name'].message,
+                price: e.errors['price'].message,
+                // picture: e.errors['picture'].message,
+                category: e.errors['category'].message
+
             }
-        } catch (err) {
-            console.log(err.message)
-            res.redirect('/error/500')
+            console.log(messageValidation)
+            req.flash('errors', messageValidation)
+            res.redirect('/admin/product/create')
         }
     }
 
@@ -60,8 +67,8 @@ export class ProductController {
             let product = await ProductModel.findOne({_id: req.params.id});
             if (product) {
                 await product.remove();
-                //thêm chuyển qua list và thêm message success
-                res.redirect('/product/product/list')
+
+                res.redirect('/admin/product/list')
             } else {
                 //thêm chuyển qua list và thêm message err
                 res.send('error: product does not exist')
@@ -76,21 +83,16 @@ export class ProductController {
         console.log(req.params.id)
         try {
             let product = await ProductModel.findOne({_id: req.params.id});
-            if (product) {
+
                 res.render('products/update', {product: product})
-            } else {
-                res.send('error: product does not exist')
-            }
+
         } catch (err) {
             console.log(err.message)
-            res.redirect('/error/500')
+
         }
     }
 
     static async update(req, res) {
-        console.log(req.body)
-        console.log(req.params.id)
-        console.log(req.fresh.originalname)
         try {
             let product = await ProductModel.findOne({_id: req.params.id});
             if (product) {
@@ -113,6 +115,49 @@ export class ProductController {
         } catch (err) {
             console.log(err.message)
             res.redirect('/error/500');
+        }
+
+    }
+    static async search(req, res, next) {
+        try {
+            let products = await ProductModel.find(
+                {
+                    name: {$regex: req.query.keyword, $options: 'i'}
+                }
+            )
+
+            res.status(200).json(products)
+        } catch (e) {
+            res.json({
+                'error': e.message
+            })
+        }
+
+    }
+    static async addToCart(req, res) {
+        const {productId} = req.body
+        try {
+            let product = await ProductModel.findOne(
+                {
+                    _id: productId
+                }
+            )
+            if (product) {
+                const newUser = new UserModel({})
+
+                newUser.carts.push(product)
+                await newUser.save()
+            } else {
+                res.status(400).json({
+                    'error': 'Cant find product'
+                })
+            }
+
+            res.status(200).json()
+        } catch (e) {
+            res.json({
+                'error': e.message
+            })
         }
 
     }

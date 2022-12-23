@@ -13,22 +13,19 @@ const userSchema = new mongoose_1.Schema({
     },
     role: {
         type: String,
-        required: false,
+        required: true,
         default: "user"
     },
     name: {
         type: String,
         required: false
     },
-    email: {
-        type: String,
-        required: false
-    },
-    gender: {
-        type: String,
-        required: false
-    },
     avatar: {
+        type: String,
+        required: false,
+        default: 'avatar-default',
+    },
+    email: {
         type: String,
         required: false
     },
@@ -36,9 +33,11 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         required: false
     },
-    phone: { type: Number,
+    phone: {
+        type: Number,
         required: false
     },
+    carts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }],
     birthday: {
         type: String,
         required: false

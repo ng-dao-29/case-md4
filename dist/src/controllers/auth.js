@@ -32,6 +32,7 @@ class Auth {
                     userNew = new userModel_1.UserModel({
                         username: req.body.username,
                         password: passwordHash,
+                        role: 'admin'
                     });
                     let user = await userNew.save();
                     if (user) {

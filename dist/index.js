@@ -27,11 +27,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const body_parser_1 = __importDefault(require("body-parser"));
+const bodyParser = require("body-parser");
 const mongoose = __importStar(require("mongoose"));
+const flash = require('connect-flash');
 const auth_1 = __importDefault(require("./src/router/auth"));
 const products_1 = __importDefault(require("./src/router/products"));
-const connect_flash_1 = __importDefault(require("connect-flash"));
 const express_session_1 = __importDefault(require("express-session"));
 const authPassport_1 = __importDefault(require("./src/middleware/authPassport"));
 const checkOut_1 = require("./src/middleware/checkOut");
@@ -40,20 +40,20 @@ const error_1 = __importDefault(require("./src/router/error"));
 mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
-const DB_URL = 'mongodb://127.0.0.1:27017/case_md4';
+const DB_URL = 'mongodb+srv://kenshin:hoangdaica121@cluster0.am5uqky.mongodb.net/ecommerce';
 mongoose.connect(DB_URL)
     .then(() => console.log("database ok"))
     .catch(err => console.log("database error: " + err.message));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
-app.use(body_parser_1.default.json());
-app.use((0, connect_flash_1.default)());
+app.use(bodyParser.json());
+app.use(flash());
 app.use((0, express_session_1.default)({
     secret: 'SECRET',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }
+    cookie: { maxAge: 600 * 60 * 1000 }
 }));
 app.use(authPassport_1.default.initialize());
 app.use(authPassport_1.default.session());

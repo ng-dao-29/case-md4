@@ -16,11 +16,12 @@ const storage = multer_1.default.diskStorage({
     }
 });
 const upload = (0, multer_1.default)({ storage: storage });
-products.get('/create', product_1.ProductController.showFormCreate);
+products.get('/create', product_1.ProductController.showFromCreate);
 products.post('/create', upload.single("picture"), product_1.ProductController.create);
 products.get('/list', product_1.ProductController.list);
 products.get('/:id/delete', product_1.ProductController.delete);
 products.get('/:id/update', product_1.ProductController.formUpdate);
 products.post('/:id/update/', upload.single("picture"), product_1.ProductController.update);
+products.get('/search', product_1.ProductController.search);
 exports.default = products;
 //# sourceMappingURL=products.js.map
