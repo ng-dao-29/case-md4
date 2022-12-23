@@ -101,14 +101,15 @@
                                                 <!-- Form -->
                                                 <div class="mb-4">
                                                     <label for="">full name</label>
-                                                    <input type="text" class="form-control" id="email" name="name">
+                                                    <input type="text" class="form-control"  name="name"
+                                                    value="<%= user.name%>">
                                                 </div>
                                                 <!-- End of Form -->
                                                 <!-- Form -->
                                                 <div class="mb-4">
                                                     <label class="my-1 me-2" for="">gender</label>
-                                                    <select class="form-select" id="" aria-label="">
-                                                        <option selected>empty</option>
+                                                    <select class="form-select" id="" aria-label="" name="gender">
+                                                        <option selected><%= user.gender%></option>
                                                         <option value="male">male</option>
                                                         <option value="female">female</option>
                                                         <option value="distinctive">distinctive</option>
@@ -118,13 +119,17 @@
                                                 <!-- Form -->
                                                 <div class="mb-4">
                                                     <label for=""> Email </label>
-                                                    <input type="email" class="form-control" id="" name="email">
+                                                    <input type="email" class="form-control" id="" name="email"
+                                                           value="<%= user.email%>"
+                                                    >
                                                 </div>
                                                 <!-- End of Form -->
                                                 <!-- Form -->
                                                 <div class="mb-4">
                                                     <label for="">Phone</label>
-                                                    <input type="tel" class="form-control" id="" name="phone">
+                                                    <input type="tel" class="form-control" id="" name="phone"
+                                                           value="<%= user.phone%>"
+                                                    >
                                                 </div>
 
                                             </div>
@@ -133,8 +138,8 @@
                                                 <!-- Form -->
                                                 <div class="my-4">
                                                     <label for="textarea">Address</label>
-                                                    <textarea class="form-control" placeholder="empty" id="textarea"
-                                                              rows="4" name="address"></textarea>
+                                                    <textarea class="form-control" id="textarea"
+                                                              rows="4"  name="address"><%= user.address%></textarea>
                                                 </div>
                                                 <!-- End of Form -->
                                                 <!-- Form -->
@@ -149,18 +154,27 @@
                                                             clip-rule="evenodd"></path></svg>
                                             </span>
                                                         <input data-datepicker="" class="form-control" id="birthday"
-                                                               type="text" placeholder="dd/mm/yyyy" name="birthday">
+                                                               type="text" placeholder="dd/mm/yyyy" name="birthday"
+                                                               value="<%= user.birthday%>"
+                                                        >
                                                     </div>
                                                 </div>
                                                 <!-- End of Form -->
                                                 <div class="mb-3">
                                                     <label for="formFile" class="form-label">Avatar</label>
-                                                    <input class="form-control" type="file" id="formFile" name="avatar">
+                                                    <input class="form-control"
+                                                           type="file" id="formFile"
+                                                           name="avatar"
+                                                           value="<%= user.avatar %>"
+                                                    >
                                                 </div>
 
                                             </div>
 
                                         </div>
+                                        <button class="btn btn-lg btn-primary" onclick="return confirm('Are you sure?')"
+                                                type="submit">Update
+                                        </button>
                                     </div>
                                 </div>
                             </form>

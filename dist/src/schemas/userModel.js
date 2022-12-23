@@ -23,7 +23,7 @@ const userSchema = new mongoose_1.Schema({
     avatar: {
         type: String,
         required: false,
-        default: 'avatar-default',
+        default: 'avatar-default.jpg',
     },
     email: {
         type: String,
@@ -35,6 +35,10 @@ const userSchema = new mongoose_1.Schema({
     },
     phone: {
         type: Number,
+        required: false
+    },
+    gender: {
+        type: String,
         required: false
     },
     carts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }],

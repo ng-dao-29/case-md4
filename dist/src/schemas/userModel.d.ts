@@ -33,6 +33,7 @@ interface IUser {
     avatar: string;
     address: string;
     phone: number;
+    gender: string;
     order: [string];
     carts: IProduct[];
     birthday: string;

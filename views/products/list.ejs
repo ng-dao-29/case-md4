@@ -105,7 +105,7 @@
                                             <td class="class=fw-bolder text-gray-500"><%= product.description%></td>
                                             <td class="class=fw-bolder text-gray-500"><%= product.producer%></td>
                                             <td>
-                                                <a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/<%= product._id %>/delete"><button  class="btn btn-outline-danger" type="button">delete</button></a>
+                                                <a onclick="return confirm('Are you sure?')" href="/admin/product/<%= product._id %>/delete"><button  class="btn btn-outline-danger" type="button">delete</button></a>
                                                 <a href="/admin/product/<%= product._id %>/update"><button class="btn btn-outline-success" type="button">update</button></a>
                                             </td>
                                         </tr>
