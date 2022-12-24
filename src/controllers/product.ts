@@ -1,16 +1,20 @@
-import ProductModel from "../schemas/productModel";
+import {ProductModel} from "../schemas/productModel";
 import {UserModel} from "../schemas/userModel";
-
+import {CategoryModel} from "../schemas/categoryModel";
 
 export class ProductController {
 
 
     static async showFromCreate(req, res, next) {
         try {
+            const dataUser = await UserModel.findOne({_id: req.user._id})
+            let category = await CategoryModel.find();
             let errors = req.flash('errors');
             console.log(errors)
             res.render('products/create', {
-                errors: errors
+                errors: errors,
+                category: category,
+                user: dataUser
             });
         } catch (e) {
             next(e)
@@ -18,8 +22,8 @@ export class ProductController {
     }
 
     static async create(req, res) {
-        console.log(req.body)
         try {
+            let category = await CategoryModel.find();
             let productNew = new ProductModel({
                 name: req.body.name,
                 price: req.body.price,
@@ -48,11 +52,14 @@ export class ProductController {
 
     static async list(req, res) {
         try {
-            console.log(req.user)
+            const dataUser = await UserModel.findOne({_id: req.user._id})
             let products = await ProductModel.find();
             if (products) {
                 console.log(products);
-                res.render('products/list', {products: products});
+                res.render('products/list', {
+                    products: products,
+                    user: dataUser
+                });
             }
         } catch (err) {
             console.log(err.message)
@@ -80,11 +87,16 @@ export class ProductController {
     }
 
     static async formUpdate(req, res) {
-        console.log(req.params.id)
         try {
+            const dataUser = await UserModel.findOne({_id: req.user._id})
+            let category = await CategoryModel.find();
             let product = await ProductModel.findOne({_id: req.params.id});
 
-                res.render('products/update', {product: product})
+                res.render('products/update', {
+                    product: product,
+                    category: category,
+                    user: dataUser
+                })
 
         } catch (err) {
             console.log(err.message)
@@ -94,24 +106,23 @@ export class ProductController {
 
     static async update(req, res) {
         try {
+        let picture ="";
             let product = await ProductModel.findOne({_id: req.params.id});
-            if (product) {
+            if (req.file) {
+                picture = req.file.originalname
+            }else {
+                picture = product.picture
+            }
                 product.name = req.body.name;
                 product.price = req.body.price;
                 product.category = req.body.category;
                 product.description = req.body.description;
-                product.picture = req.file.originalname;
+                product.picture = picture;
                 product.quantity = req.body.quantity;
                 product.producer = req.body.producer;
+
                 await product.save();
-                if (product) {
-                    res.redirect('/admin/product/list')
-                } else {
-                    res.send("update err")
-                }
-            } else {
-                res.send('error: product does not exist');
-            }
+                res.redirect('/admin/product/list');
         } catch (err) {
             console.log(err.message)
             res.redirect('/error/500');
@@ -159,6 +170,5 @@ export class ProductController {
                 'error': e.message
             })
         }
-
     }
 }

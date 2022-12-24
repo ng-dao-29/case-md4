@@ -9,4 +9,4 @@ export interface IProduct {
     producer: string;
 }
 declare const ProductModel: mongoose.Model<IProduct, {}, {}, {}, any>;
-export default ProductModel;
+export { ProductModel };

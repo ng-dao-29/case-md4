@@ -26,12 +26,10 @@ const productSchema = new Schema<IProduct>({
     },
     description: {
         type: String,
-        required: false
-    },
+        required: false},
     picture: {
         type: String,
-        required: true,
-
+        // required: [true, 'picture must be entered']
     },
     quantity: {
         type: Number,
@@ -45,4 +43,4 @@ const productSchema = new Schema<IProduct>({
 })
 
 const ProductModel = mongoose.model<IProduct>('Product', productSchema);
-export default ProductModel
+export {ProductModel}

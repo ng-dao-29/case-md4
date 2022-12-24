@@ -3,17 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Dashboard = void 0;
 const userModel_1 = require("../schemas/userModel");
 class Dashboard {
-    static showHome(req, res) {
-        res.render('dashboard/home');
+    static async showHome(req, res) {
+        const dataUser = await userModel_1.UserModel.findOne({ _id: req.user._id });
+        res.render('dashboard/home', { user: dataUser });
     }
-    static formUpdate(req, res) {
-        const dataUser = req.user;
+    static async formUpdate(req, res) {
+        const dataUser = await userModel_1.UserModel.findOne({ _id: req.user._id });
         console.log(dataUser);
         res.render('dashboard/update', { user: dataUser });
     }
     static async updateUser(req, res) {
         try {
-            const dataUser = req.user;
+            let dataUser = await userModel_1.UserModel.findOne({ _id: req.user._id });
             let avatar = "";
             if (req.file) {
                 avatar = req.file.originalname;
@@ -36,7 +37,6 @@ class Dashboard {
             res.redirect('/admin/dashboard/home');
         }
         catch (e) {
-            ;
             console.log(e.message);
         }
     }

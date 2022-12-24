@@ -23,6 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductModel = void 0;
 const mongoose_1 = require("mongoose");
 const mongoose = __importStar(require("mongoose"));
 const productSchema = new mongoose_1.Schema({
@@ -44,7 +45,6 @@ const productSchema = new mongoose_1.Schema({
     },
     picture: {
         type: String,
-        required: true,
     },
     quantity: {
         type: Number,
@@ -57,5 +57,5 @@ const productSchema = new mongoose_1.Schema({
     },
 });
 const ProductModel = mongoose.model('Product', productSchema);
-exports.default = ProductModel;
+exports.ProductModel = ProductModel;
 //# sourceMappingURL=productModel.js.map

@@ -40,12 +40,14 @@ const error_1 = __importDefault(require("./src/router/error"));
 mongoose.set('strictQuery', true);
 const port = 3000;
 const app = (0, express_1.default)();
-const DB_URL = 'mongodb+srv://kenshin:hoangdaica121@cluster0.am5uqky.mongodb.net/ecommerce';
+const DB_URL = 'mongodb://127.0.0.1:27017/case_md4';
+mongoose.set('strictQuery', true);
 mongoose.connect(DB_URL)
     .then(() => console.log("database ok"))
     .catch(err => console.log("database error: " + err.message));
 app.set('view engine', 'ejs');
 app.set('views', './views');
+app.use(express_1.default.static('public'));
 app.use(express_1.default.static('public'));
 app.use(bodyParser.json());
 app.use(flash());

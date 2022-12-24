@@ -50,10 +50,13 @@
     <!-- Volt CSS -->
     <link type="text/css" href="/css/volt.css" rel="stylesheet">
 
+    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
 
 <body>
+
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
@@ -72,14 +75,13 @@
 
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
     <div class="sidebar-inner px-4 pt-3">
-        <%- include('../navigationBar/LeftBar') %>
+        <%- include('../navigationBar/leftBar') %>
     </div>
 </nav>
 
 <main class="content">
 
     <%- include('../navigationBar/quickPick') %>
-
     <div class="row">
         <div class="col-12">
             <div class="row">
@@ -92,95 +94,92 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <form action="/admin/product/create" method="post" enctype="multipart/form-data">
-                                <div class="col-12 mb-4">
-                                    <div class="card border-0 shadow components-section">
-                                        <div class="card-body">
-                                            <div class="row mb-4">
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <!-- Form -->
-                                                    <div class="mb-4">
-                                                        <label for="firstName"> Product's name</label>
-                                                        <input type="text" class="form-control" id="name"
-                                                               aria-describedby="" name="name">
-                                                        <% if (errors != '') { %>
-                                                            <p class="text-danger"><%= errors[0].name %></p>
-                                                        <% } %>
 
-                                                        <small id="" class="form-text text-muted"></small>
+                        <div class="table-responsive">
+                            <form action="/admin/product/create" method="post"
+                                  enctype="multipart/form-data">
+                                <div class="card border-0 shadow components-section">
+                                    <div class="card-body">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-4 col-sm-6">
+                                                <!-- Form -->
+                                                <div class="mb-4">
+                                                    <label for="firstName">Product's name</label>
+                                                    <input type="text" class="form-control" id="name"
+                                                           aria-describedby="" name="name">
+                                                    <% if (errors != '') { %>
+                                                        <p class="text-danger"><%= errors[0].name %></p>
+                                                    <% } %>
+
+                                                    <small id="" class="form-text text-muted"></small>
+                                                </div>
+                                                <!-- End of Form -->
+                                                <!-- Form -->
+                                                <div class="mb-3">
+                                                    <label for="exampleInputIconLeft">Picture</label>
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control"
+                                                               id="exampleInputIconLeft"
+                                                               name="picture">
+                                                        <% if (errors != '') { %>
+                                                            <p class="text-danger"><%= errors[0].picture %></p>
+                                                        <% } %>
                                                     </div>
-                                                    <!-- End of Form -->
-                                                    <!-- Form -->
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputIconLeft">Picture</label>
-                                                        <div class="input-group">
-                                                            <input type="file" class="form-control"
-                                                                   id="exampleInputIconLeft"
-                                                                   name="picture">
-                                                            <% if (errors != '') { %>
-                                                                <p class="text-danger"><%= errors[0].picture %></p>
-                                                            <% } %>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End of Form -->
-                                                    <!-- Form -->
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputIconRight">price</label>
-                                                        <div class="input-group">
-                                                            <input type="number" class="form-control"
-                                                                   id="exampleInputIconRight"
-                                                                   name="price">
-                                                        </div>
+                                                </div>
+                                                <!-- End of Form -->
+                                                <!-- Form -->
+                                                <div class="mb-3">
+                                                    <label for="exampleInputIconRight">price</label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control"
+                                                               id=""
+                                                               name="price">
                                                         <% if (errors != '') { %>
                                                             <p class="text-danger"><%= errors[0].price %></p>
                                                         <% } %>
                                                     </div>
-                                                    <!-- End of Form -->
-                                                    <!-- Form -->
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputIconPassword">category</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control"
-                                                                   id="exampleInputIconPassword"
-                                                                   name="category">
-                                                        </div>
-                                                        <% if (errors != '') { %>
-                                                            <p class="text-danger"><%= errors[0].category %></p>
-                                                        <% } %>
-                                                    </div>
-                                                    <!-- End of Form -->
-                                                    <!-- Form -->
-                                                    <div class="mb-3">
-                                                        <label for="firstName">Producer</label>
-                                                        <input type="text" class="form-control" id="firstName"
-                                                               name="producer">
-                                                    </div>
-                                                    <!-- End of Form -->
                                                 </div>
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div class="mb-4">
-                                                        <label for="firstName">quantity</label>
-                                                        <input type="number" class="form-control" id="firstName"
-                                                               name="quantity">
-                                                    </div>
-                                                    <!-- Form -->
-                                                    <div class="my-4">
-                                                        <label for="textarea">Description</label>
-                                                        <textarea class="form-control"
-                                                                  placeholder="Enter your message..." id="textarea"
-                                                                  rows="4" name="description"></textarea>
-                                                    </div>
-                                                    <!-- End of Form -->
-                                                    <!-- Form -->
-                                                    <!-- End of Form -->
+                                                <!-- End of Form -->
+                                                <!-- Form -->
+                                                <div class="mb-4">
+                                                    <label class="my-1 me-2" for="">Category</label>
+                                                    <select class="form-select" id="" aria-label="" name="category">
+                                                        <% category.forEach((category) => { %>
+                                                        <option value="<%=category.name  %>"><%= category.name %></option>
+                                                        <%})%>
+                                                    </select>
                                                 </div>
+                                                <!-- End of Form -->
+                                                <!-- Form -->
+                                                <div class="mb-3">
+                                                    <label for="firstName">Producer</label>
+                                                    <input type="text" class="form-control" id=""
+                                                           name="producer">
+                                                </div>
+                                                <!-- End of Form -->
                                             </div>
-                                            <button class="btn btn-lg btn-primary" onclick="handleSubmit(event)"
-                                                    type="submit">add
-                                            </button>
+                                            <div class="col-lg-4 col-sm-6">
+                                                <div class="mb-4">
+                                                    <label for="firstName">quantity</label>
+                                                    <input type="number" class="form-control"
+                                                           id="" name="quantity"
+                                                           value="0">
+                                                </div>
+                                                <!-- Form -->
+                                                <div class="my-4">
+                                                    <label for="textarea">Description</label>
+                                                    <textarea class="form-control"
+                                                              placeholder="Enter your message..." id="textarea"
+                                                              rows="4" name="description"></textarea>
+                                                </div>
+                                                <!-- End of Form -->
+                                                <!-- Form -->
+                                                <!-- End of Form -->
+                                            </div>
                                         </div>
-
+                                        <button class="btn btn-lg btn-primary" onclick="handleSubmit(event)"
+                                                type="submit">add
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -190,7 +189,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="card theme-settings bg-gray-800 theme-settings-expand" id="theme-settings-expand">
         <div class="card-body bg-gray-800 text-white rounded-top p-3 py-2">
@@ -233,7 +231,6 @@
 </main>
 
 <!-- Core -->
-
 <script src="/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -261,10 +258,7 @@
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
->
-
 <script src="/assets/js/volt.js"></script>
-
 
 
 </body>
