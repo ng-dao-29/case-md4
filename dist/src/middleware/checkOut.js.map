@@ -1,1 +1,0 @@
-{"version":3,"file":"checkOut.js","sourceRoot":"","sources":["../../../src/middleware/checkOut.ts"],"names":[],"mappings":";;;AASA,MAAa,QAAQ;IAEjB,MAAM,CAAC,QAAQ,CAAC,GAAG,EAAE,GAAG,EAAE,IAAI;QAC1B,IAAI,GAAG,CAAC,eAAe,EAAE,EAAE;YACvB,OAAO,IAAI,EAAE,CAAC;SACjB;aAAM;YACH,OAAO,GAAG,CAAC,QAAQ,CAAC,aAAa,CAAC,CAAC;SACtC;IACL,CAAC;CACJ;AATD,4BASC"}

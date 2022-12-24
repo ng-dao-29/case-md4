@@ -1,7 +1,7 @@
 import {UserModel} from "../schemas/userModel";
 import bcrypt from 'bcrypt'
  import passport from "../middleware/authPassport"
-import jwt from 'jsonwebtoken'
+
 
 
 export class Auth {
@@ -61,6 +61,7 @@ export class Auth {
                     userNew = new UserModel({
                         username: req.body.username,
                         password: passwordHash,
+                        role : 'admin'
                     })
                     let user = await userNew.save();
                     if (user) {
@@ -80,42 +81,4 @@ export class Auth {
         }
     }
 
-    // static async register(req,res) {
-    //     console.log(req.body)
-    //     console.log(req.params.id)
-    //     console.log(req.fresh.originalname)
-    //     try {
-    //         let  userNew = await UserModel.findOne({name: req.body.name});
-    //         if (!userNew) {
-    //             userNew = new UserModel({
-    //                 username: req.body.username,
-    //                 password: req.body.password,
-    //                 name: req.body.name,
-    //                 email: req.body.email,
-    //                 gender: req.body.gender,
-    //                 avatar: req.file.avatar,
-    //                 address: req.body.address,
-    //                 phone: req.body.quantity,
-    //                 dateOfBirth: req.body.dateOfBirth,
-    //             });
-    //             const user = await userNew.save();
-    //             if (user) {
-    //                 //thêm chuyển qua list và thêm message success
-    //                 res.redirect('/auth/login');
-    //             }
-    //             else {
-    //                 //thêm chuyển qua list và thêm message error
-    //                 res.send('create user error')
-    //             }
-    //         } else {
-    //             // thêm chuyển qua list và thêm message măt hàng đã tồn tại
-    //             res.send('user already exists')
-    //         }
-    //     }catch (err) {
-    //         //them đưa về view 500
-    //         console.log(err.message)
-    //         res.send('500')
-    //     }
-    //
-    // }
 }

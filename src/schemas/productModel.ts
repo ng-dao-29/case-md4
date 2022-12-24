@@ -1,6 +1,7 @@
-import {Schema, model} from "mongoose";
+import {Schema} from "mongoose";
+import * as mongoose from "mongoose";
 
-interface IProduct {
+export interface IProduct {
     name: string;
     price: number;
     category: string;
@@ -13,33 +14,32 @@ interface IProduct {
 const productSchema = new Schema<IProduct>({
     name: {
         type: String,
-        required: true
+        required: [true, 'name must be entered']
     },
     price: {
         type: Number,
-        required: true
+        required: [true, 'price must be entered']
     },
     category: {
         type: String,
-        required: true
+        required: [true, 'Category must be entered']
     },
     description: {
         type: String,
-        required: false
-    },
+        required: false},
     picture: {
         type: String,
-        required: true
+        // required: [true, 'picture must be entered']
     },
     quantity: {
         type: Number,
-        required: false,
-        default: 0},
+        required: false, default: 0
+    },
     producer: {
         type: String,
         required: false
     },
 })
 
-const ProductModel = model<IProduct>('Product', productSchema);
-export {ProductModel};
+const ProductModel = mongoose.model<IProduct>('Product', productSchema);
+export {ProductModel}

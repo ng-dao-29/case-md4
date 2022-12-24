@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-products.get('/create',ProductController.showFormCreate)
+products.get('/create',ProductController.showFromCreate)
 
 
 products.post('/create',upload.single("picture"), ProductController.create)
@@ -30,8 +30,8 @@ products.get('/:id/update', ProductController.formUpdate)
 
 products.post('/:id/update/', upload.single("picture"), ProductController.update)
 
-// products.get('/search',(req, res) => {
-//     ProductCTL.search(req, res).catch()
-// })
+products.get('/search', ProductController.search)
+
+
 
 export default products;
