@@ -27,7 +27,9 @@ const searchProduct = (value) => {
             html += `<td>${product.quality}</td>`;
             html += `<td>${product.description}</td>`;
             html += `<td>${product.producer}</td>`;
-            html += `<td><a onclick="return confirm('Are you sure you want to delete this product?')" href="/admin/product/${product._id}/delete" class="btn btn-danger">Delete</a></td>`;
+            html += `<td><a onclick="return confirm('Chắc chắn muốn xóa ?')" href="/admin/product/<%= product._id %>/delete"><button  class="btn btn-outline-danger" type="button">delete</button></a>
+                     <a href="/admin/product/<%= product._id %>/update"><button class="btn btn-outline-success" type="button">update</button></a>
+                     </td>`;
             html += '</tr>';
         })
 

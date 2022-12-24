@@ -48,7 +48,8 @@ const productSchema = new mongoose_1.Schema({
     },
     quantity: {
         type: Number,
-        required: false, default: 0
+        required: false,
+        default: 0
     },
     producer: {
         type: String,

@@ -33,7 +33,8 @@ const productSchema = new Schema<IProduct>({
     },
     quantity: {
         type: Number,
-        required: false, default: 0
+        required: false,
+        default: 0
     },
     producer: {
         type: String,
