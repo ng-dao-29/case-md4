@@ -1,5 +1,4 @@
 import {Schema, model} from "mongoose";
-import {ICart} from "./cartModel";
 import {IProduct} from "./productModel";
 
 interface IUser {
@@ -13,7 +12,7 @@ interface IUser {
     phone: number;
     gender: string;
     order: [string];
-    carts: IProduct[];
+    carts: object;
     birthday: string;
 }
 
@@ -57,13 +56,15 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: false
     },
-    carts: [{type: Schema.Types.ObjectId, ref: 'Product'}],
+    carts: {
+        type: Schema.Types.ObjectId,
+        ref: 'cart'
+    },
 
     birthday: {
         type: String,
         required: false
-    }
-
+    },
 })
 
 const UserModel = model<IUser>('User', userSchema);

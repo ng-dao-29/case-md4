@@ -41,11 +41,14 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         required: false
     },
-    carts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }],
+    carts: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'cart'
+    },
     birthday: {
         type: String,
         required: false
-    }
+    },
 });
 const UserModel = (0, mongoose_1.model)('User', userSchema);
 exports.UserModel = UserModel;

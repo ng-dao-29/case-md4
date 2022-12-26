@@ -1,7 +1,6 @@
 import express from "express";
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 import * as mongoose from "mongoose";
-const flash = require('connect-flash');
 import routerAuth from "./src/router/auth";
 import products from "./src/router/products";
 import flash from "connect-flash"
@@ -26,24 +25,24 @@ app.set('views', './views');
 app.use(express.static( 'public'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(flash())
 app.use(session({
     secret: 'SECRET',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: {maxAge: 600 * 60 * 1000}
+    cookie: {maxAge: 60 * 60 * 1000 * 24}
 }));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use('/auth',routerAuth);
-app.use(CheckOut.checkOut)
+app.use(CheckOut.checkOut);
 
 app.use('/admin/product',products);
 app.use('/admin/dashboard', dashboard);
+app.use('/user/product',products)
+app.use('/user/dashboard',dashboard)
 app.use('/error', error);
-
 app.listen(port, () => {
     console.log("app running on port: " + port)
 })

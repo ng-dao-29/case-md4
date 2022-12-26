@@ -7,8 +7,10 @@ import bcrypt from 'bcrypt'
 export class Auth {
 
     static formLogin(req,res) {
-        res.render('auth/login');
-    }
+        let notPass = req.flash('notPass');
+        let notUser = req.flash('notUser');
+        res.render('auth/login',{ notPass : notPass, notUser: notUser  });
+    };
 
     // static async loginJWT(req, res) {
     //     console.log('ygy')
@@ -55,13 +57,12 @@ export class Auth {
             console.log(req.body)
             if (req.body.password === req.body.confirm_password) {
                 const passwordHash = await bcrypt.hash(req.body.password, 10);
-                console.log(passwordHash)
                 let userNew = await UserModel.findOne({username: req.body.username});
                 if (!userNew) {
                     userNew = new UserModel({
                         username: req.body.username,
                         password: passwordHash,
-                        role : 'admin'
+                        avatar: 'avatar-default.jpg',
                     })
                     let user = await userNew.save();
                     if (user) {
@@ -74,10 +75,10 @@ export class Auth {
                     res.send({err: "tài khảo đã tồn tại"})
                 }
             }else {
-                res.send('password ko chuùng')
+                res.redirect('/auth/register')
             }
         }catch (err) {
-            res.send({err: err.message})
+           res.redirect('/error/500')
         }
     }
 

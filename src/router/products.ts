@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {ProductController} from "../controllers/product";
+import {ProductController} from "../controllers/product.controller";
 import multer from "multer";
 import {decentralization} from "../middleware/decentralization";
 
@@ -15,23 +15,29 @@ const storage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({storage: storage})
 
-products.get('/create',ProductController.showFromCreate)
+products.get('/create', decentralization, ProductController.showFromCreate)
 
-
-products.post('/create',upload.single("picture"), ProductController.create)
+products.post('/create', [upload.single("picture"), decentralization], ProductController.create)
 
 products.get('/list', ProductController.list)
 
-products.get('/:id/delete', ProductController.delete)
+products.get('/:id/delete', decentralization, ProductController.delete)
 
 products.get('/:id/update', ProductController.formUpdate)
 
-products.post('/:id/update/', upload.single("picture"), ProductController.update)
+products.post('/:id/update/', [upload.single("picture"), decentralization], ProductController.update)
 
-products.get('/search', ProductController.search)
+products.get('/search', ProductController.search);
 
+products.post('/add-cart', ProductController.addCart);
 
+products.get('/cart', ProductController.showCart);
+
+products.get('/',ProductController.getProductId)
+products.get('/:id/skip-product', ProductController.skipProduct);
+
+products.post('/:id/order', ProductController.oder);
 
 export default products;

@@ -1,8 +1,8 @@
 export const decentralization = async (req, res, next) => {
-    let user = req.decoded;
-    if (user.role === 'product') {
+    let user = req.user;
+    if (user.role === 'admin') {
         next();
     } else {
-        res.send('404')
+        res.redirect('/error/404')
     }
 }

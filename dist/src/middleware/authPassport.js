@@ -13,10 +13,14 @@ passport_1.default.serializeUser((user, done) => {
 passport_1.default.deserializeUser(function (user, done) {
     done(null, user);
 });
-passport_1.default.use('local', new passport_local_1.default(async (username, password, done) => {
+passport_1.default.use('local', new passport_local_1.default({ passReqToCallback: true }, async (req, username, password, done) => {
+    console.log(username, password);
+    if (password === undefined && username === undefined) {
+        return done(null, false, req.flash('notPass', ['Need to enter information before logging in', ""]), req.flash('notUser', 'Need to enter information before logging in'));
+    }
     const user = await userModel_1.UserModel.findOne({ username: username });
     if (!user) {
-        return done(null, false);
+        return done(null, false, req.flash('notUser', 'Account does not exist'));
     }
     else {
         let checkPass = await bcrypt_1.default.compare(password, user.password);
@@ -24,7 +28,7 @@ passport_1.default.use('local', new passport_local_1.default(async (username, pa
             return done(null, user);
         }
         else {
-            return done(null, false);
+            return done(null, false, req.flash('notPass', ['incorrect password', `${username}`]));
         }
     }
 }));

@@ -14,6 +14,7 @@ export interface IProduct {
 const productSchema = new Schema<IProduct>({
     name: {
         type: String,
+        unique: true,
         required: [true, 'name must be entered']
     },
     price: {
@@ -29,16 +30,17 @@ const productSchema = new Schema<IProduct>({
         required: false},
     picture: {
         type: String,
-        // required: [true, 'picture must be entered']
+        required: [true, 'picture must be entered']
     },
     quantity: {
         type: Number,
-        required: false,
-        default: 0
+        required: true,
+        default: 1
     },
     producer: {
         type: String,
-        required: false
+        required: true,
+        default : "no manufacturer"
     },
 })
 

@@ -29,6 +29,7 @@ const mongoose = __importStar(require("mongoose"));
 const productSchema = new mongoose_1.Schema({
     name: {
         type: String,
+        unique: true,
         required: [true, 'name must be entered']
     },
     price: {
@@ -45,15 +46,17 @@ const productSchema = new mongoose_1.Schema({
     },
     picture: {
         type: String,
+        required: [true, 'picture must be entered']
     },
     quantity: {
         type: Number,
-        required: false,
-        default: 0
+        required: true,
+        default: 1
     },
     producer: {
         type: String,
-        required: false
+        required: true,
+        default: "no manufacturer"
     },
 });
 const ProductModel = mongoose.model('Product', productSchema);

@@ -22,24 +22,22 @@ class Dashboard {
             else {
                 avatar = dataUser.avatar;
             }
-            let user = await userModel_1.UserModel.findOne({ _id: req.user._id });
-            console.log(user);
-            user.name = req.body.name;
-            user.avatar = avatar;
-            user.address = req.body.address;
-            user.phone = req.body.phone;
-            user.birthday = req.body.birthday;
-            user.email = req.body.email;
-            user.gender = req.body.gender;
-            await user.save();
-            if (user) {
-            }
+            await userModel_1.UserModel.updateOne({ _id: req.user._id }, {
+                name: req.body.name,
+                avatar: avatar,
+                address: req.body.address,
+                phone: req.body.phone,
+                birthday: req.body.birthday,
+                email: req.body.email,
+                gender: req.body.gender
+            });
             res.redirect('/admin/dashboard/home');
         }
         catch (e) {
             console.log(e.message);
+            res.redirect('/error/500');
         }
     }
 }
 exports.Dashboard = Dashboard;
-//# sourceMappingURL=dashboard.js.map
+//# sourceMappingURL=dashboard.controller.js.map

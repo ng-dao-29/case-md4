@@ -21,11 +21,19 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
-/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import { IProduct } from "./productModel";
-export interface ICart {
-    name: string;
-    products: IProduct[];
-}
-export declare const CartModel: import("mongoose").Model<ICart, {}, {}, {}, any>;
+import { Schema } from "mongoose";
+declare const CartModel: import("mongoose").Model<{
+    items: {
+        quantity: number;
+        products?: import("mongoose").Types.ObjectId;
+    }[];
+    user?: import("mongoose").Types.ObjectId;
+}, {}, {}, {}, Schema<any, import("mongoose").Model<any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
+    items: {
+        quantity: number;
+        products?: import("mongoose").Types.ObjectId;
+    }[];
+    user?: import("mongoose").Types.ObjectId;
+}>>;
+export { CartModel };

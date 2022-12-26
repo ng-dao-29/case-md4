@@ -102,15 +102,22 @@
                                     <div class="card-body">
                                         <div class="row mb-4">
                                             <div class="col-lg-4 col-sm-6">
-                                                <!-- Form -->
+
+                                                <% let messageErrName = "";
+                                                let errPrice = "";
+                                                let errPicture = "";
+                                                let styleInputName = "form-control"
+
+                                                if (errName.length > 0) {
+                                                    messageErrName = errName[0];
+                                                    styleInputName = "form-control is-invalid"
+                                                }%>
+
                                                 <div class="mb-4">
                                                     <label for="firstName">Product's name</label>
-                                                    <input type="text" class="form-control" id="name"
-                                                           aria-describedby="" name="name">
-                                                    <% if (errors != '') { %>
-                                                        <p class="text-danger"><%= errors[0].name %></p>
-                                                    <% } %>
-
+                                                    <input type="text" class="<%= styleInputName%>" id="name"
+                                                           aria-describedby="" name="name" required>
+                                                        <p class="text-danger"><%= errName %></p>
                                                     <small id="" class="form-text text-muted"></small>
                                                 </div>
                                                 <!-- End of Form -->
@@ -120,10 +127,8 @@
                                                     <div class="input-group">
                                                         <input type="file" class="form-control"
                                                                id="exampleInputIconLeft"
-                                                               name="picture">
-                                                        <% if (errors != '') { %>
-                                                            <p class="text-danger"><%= errors[0].picture %></p>
-                                                        <% } %>
+                                                               name="picture" required>
+                                                            <p class="text-danger"><%= errPicture %></p>
                                                     </div>
                                                 </div>
                                                 <!-- End of Form -->
@@ -132,12 +137,9 @@
                                                     <label for="exampleInputIconRight">price</label>
                                                     <div class="input-group">
                                                         <input type="number" class="form-control"
-                                                               id=""
-                                                               name="price">
-                                                        <% if (errors != '') { %>
-                                                            <p class="text-danger"><%= errors[0].price %></p>
-                                                        <% } %>
+                                                               id="" name="price" required>
                                                     </div>
+                                                        <p class="text-danger"><%= errPrice %></p>
                                                 </div>
                                                 <!-- End of Form -->
                                                 <!-- Form -->

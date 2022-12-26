@@ -27,11 +27,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const bodyParser = require("body-parser");
+const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose = __importStar(require("mongoose"));
-const flash = require('connect-flash');
 const auth_1 = __importDefault(require("./src/router/auth"));
 const products_1 = __importDefault(require("./src/router/products"));
+const connect_flash_1 = __importDefault(require("connect-flash"));
 const express_session_1 = __importDefault(require("express-session"));
 const authPassport_1 = __importDefault(require("./src/middleware/authPassport"));
 const checkOut_1 = require("./src/middleware/checkOut");
@@ -49,20 +49,22 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express_1.default.static('public'));
 app.use(express_1.default.static('public'));
-app.use(bodyParser.json());
-app.use(flash());
+app.use(body_parser_1.default.json());
 app.use((0, express_session_1.default)({
     secret: 'SECRET',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 600 * 60 * 1000 }
+    cookie: { maxAge: 60 * 60 * 1000 * 24 }
 }));
+app.use((0, connect_flash_1.default)());
 app.use(authPassport_1.default.initialize());
 app.use(authPassport_1.default.session());
 app.use('/auth', auth_1.default);
 app.use(checkOut_1.CheckOut.checkOut);
 app.use('/admin/product', products_1.default);
 app.use('/admin/dashboard', dashboard_1.default);
+app.use('/user/product', products_1.default);
+app.use('/user/dashboard', dashboard_1.default);
 app.use('/error', error_1.default);
 app.listen(port, () => {
     console.log("app running on port: " + port);

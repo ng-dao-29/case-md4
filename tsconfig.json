@@ -15,5 +15,6 @@
         "noUnusedParameters": false,
         "noUnusedLocals": false,
     },
+    "strictPopulate" : false,
     "exclude": ["node_modules", "dist"]
 }

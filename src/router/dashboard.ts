@@ -1,6 +1,7 @@
 import {Router} from "express";
-import {Dashboard} from "../controllers/dashboard";
+import {Dashboard} from "../controllers/dashboard.controller";
 import multer from "multer";
+import {decentralization} from "../middleware/decentralization";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/upload')

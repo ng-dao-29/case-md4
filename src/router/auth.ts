@@ -1,7 +1,8 @@
 import {Router} from "express";
 import multer from "multer";
-import {Auth} from "../controllers/auth";
+import {Auth} from "../controllers/auth.controller";
 import passport from "../middleware/authPassport";
+import flash from 'flash'
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
