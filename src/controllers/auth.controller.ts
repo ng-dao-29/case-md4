@@ -42,7 +42,9 @@ export class Auth {
     // }
 
     static formRegister(req,res) {
-        res.render('auth/createUser');
+        let message = req.flash("message")
+        console.log(message)
+        res.render('auth/createUser', {messages: message});
     }
 
     static logOut(req, res, next) {
@@ -64,21 +66,18 @@ export class Auth {
                         password: passwordHash,
                         avatar: 'avatar-default.jpg',
                     })
-                    let user = await userNew.save();
-                    if (user) {
+                         await userNew.save();
                         res.redirect('/auth/login')
-                    }
-                    else {
-                        res.send('add error')
-                    }
                 } else {
-                    res.send({err: "tài khảo đã tồn tại"})
+                    req.flash("message", "Account already exists")
+                    res.redirect('/auth/register')
                 }
             }else {
+                req.flash("message", "password authentication is not correct")
                 res.redirect('/auth/register')
             }
         }catch (err) {
-           res.redirect('/error/500')
+           res.redirect('/error/500');
         }
     }
 

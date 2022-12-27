@@ -73,9 +73,12 @@ export class ProductController {
 
     static async list(req, res) {
         try {
+            const products = await ProductModel.find();
+            // let limit  = 10;
+            // let amountProducts = products.length;
+            // let amountPage = Math.ceil(amountProducts/limit);
             let message = req.flash('message')
             const dataUser = await UserModel.findOne({_id: req.user._id})
-            let products = await ProductModel.find();
             if (products) {
                 res.render('products/list', {
                     products: products,
@@ -135,10 +138,14 @@ export class ProductController {
             } else {
                 picture = product.picture
             }
+            let description = req.body.description
+            if (req.body.description === "") {
+                description= product.description
+            }
             product.name = req.body.name;
             product.price = req.body.price;
             product.category = req.body.category;
-            product.description = req.body.description;
+            product.description = description;
             product.picture = picture;
             product.quantity = req.body.quantity;
             product.producer = req.body.producer;
@@ -159,8 +166,7 @@ export class ProductController {
                     name: {$regex: req.query.keyword, $options: 'i'}
                 }
             )
-            console.log(products)
-            res.status(200).json({data: products})
+            res.status(200).json(products)
         } catch (e) {
             res.json({
                 'error': e.message

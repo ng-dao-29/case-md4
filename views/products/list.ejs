@@ -91,7 +91,7 @@
                                     <th class="border-bottom" scope="col">Price</th>
                                     <th class="border-bottom" scope="col">Category</th>
                                     <th class="border-bottom" scope="col">Quantity</th>
-                                    <th class="border-bottom" scope="col">Description</th>
+                                    <th class="border-bottom" scope="col" >Description</th>
                                     <th class="border-bottom" scope="col">Producer</th>
                                     <th class="border-bottom" scope="col">make a choice</th>
                                 </tr>
@@ -107,11 +107,11 @@
                                             <td class="class=fw-bolder text-gray-500"><%= index + 1 %></td>
                                             <td><img style="width: 100px" src="/upload/<%= product.picture %>" alt="">
                                             </td>
-                                            <td class="class=fw-bolder text-gray-500"><%= product.name %></td>
+                                            <td class="class=fw-bolder text-gray-500" style="max-width: 150px; white-space: normal"><%= product.name %></td>
                                             <td class="class=fw-bolder text-gray-500"><%= product.price %></td>
                                             <td class="class=fw-bolder text-gray-500"><%= product.category %></td>
                                             <td class="class=fw-bolder text-gray-500"><%= product.quantity %></td>
-                                            <td class="class=fw-bolder text-gray-500"><%= product.description %></td>
+                                            <td class="class=fw-bolder text-gray-500" style="max-width: 200px; white-space: normal"><%= product.description %></td>
                                             <td class="class=fw-bolder text-gray-500"><%= product.producer %></td>
                                             <td>
 

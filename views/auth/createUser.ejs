@@ -50,7 +50,10 @@
 <body>
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <main>
-
+        <% let message = ""
+        if( messages.length > 0) {
+            message = messages[0]
+        }%>
         <!-- Section -->
         <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
             <div class="container">
@@ -59,6 +62,8 @@
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">Create Account </h1>
+                                <p style="color: red"> <%= message %> </p>
+
                             </div>
                             <form action="/auth/register" method="post" class="mt-4" enctype="multipart/form-data">
                                 <!-- Form -->

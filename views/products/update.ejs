@@ -109,7 +109,7 @@
                                             <input type="text" class="form-control"
                                                    id="name" aria-describedby=""
                                                    value="<%= product.name %>"
-                                                   name="name">
+                                                   name="name" required>
                                             <!--                                                        <% // if (errors != '') {   %>-->
                                             <!--                                                        <p class="text-danger"><%= // errors[0].name   %></p>-->
                                             <!--                                                        <%  // }   %>-->
@@ -138,7 +138,7 @@
                                                 <input type="number" class="form-control"
                                                        id="exampleInputIconRight"
                                                        value="<%= product.price %>"
-                                                       name="price">
+                                                       name="price" required>
                                                 <!--                                                            <% // if (errors != '') {   %>-->
                                                 <!--                                                            <p class="text-danger"><%= // errors[0].price   %></p>-->
                                                 <!--                                                            <%  // }   %>-->
@@ -148,7 +148,7 @@
                                         <!-- Form -->
                                         <div class="mb-4">
                                             <label class="my-1 me-2" for="">Category</label>
-                                            <select class="form-select" id="" aria-label="" name="category">
+                                            <select class="form-select" id="" aria-label="" name="category" required>
                                                 <option selected value="<%= product.category%>">
                                                     <%= product.category%>
                                                 </option>
@@ -164,7 +164,7 @@
                                             <input type="text" class="form-control"
                                                    id="firstName"
                                                    value="<%= product.producer %>"
-                                                   name="producer">
+                                                   name="producer" required>
                                         </div>
                                         <!-- End of Form -->
                                     </div>
@@ -174,7 +174,7 @@
                                             <input type="number" class="form-control"
                                                    id="firstName"
                                                    name="quantity"
-                                                   value="<%= product.quantity %>">
+                                                   value="<%= product.quantity %>" required>
 
                                         </div>
                                         <!-- Form -->
