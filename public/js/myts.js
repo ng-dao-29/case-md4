@@ -24,7 +24,6 @@ const searchProduct = (value) => {
                      </td>`;
             html += '</tr>';
 
-
         })
         document.getElementById('list-product').innerHTML = html;
     })
