@@ -1,9 +1,6 @@
 import {UserModel} from "../schemas/userModel";
 import bcrypt from 'bcrypt'
  import passport from "../middleware/authPassport"
-
-
-
 export class Auth {
 
     static formLogin(req,res) {
@@ -13,8 +10,6 @@ export class Auth {
     };
 
     // static async loginJWT(req, res) {
-    //     console.log('ygy')
-    //     console.log(req.body)
     //     try {
     //         const user = await UserModel.findOne({username: req.body.username});
     //         if (user) {

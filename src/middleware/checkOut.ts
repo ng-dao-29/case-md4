@@ -1,4 +1,3 @@
-
 export class CheckOut {
 
     static checkOut(req, res, next) {

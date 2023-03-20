@@ -2,11 +2,8 @@ import {ProductModel} from "../schemas/productModel";
 import {UserModel} from "../schemas/userModel";
 import {CategoryModel} from "../schemas/categoryModel";
 import {CartModel} from "../schemas/cartModel";
-import error from "../router/error";
-import products from "../router/products";
 
 export class ProductController {
-
 
     static async showFromCreate(req, res) {
         try {
@@ -30,24 +27,6 @@ export class ProductController {
 
     static async create(req, res) {
         try {
-            // let messageError = new Array<string>();
-            // let message = "This box cannot be left blank"
-            // let errName = message
-            // let errPicture = message
-            // let errPrice = message
-            // if (req.body.name === "") {
-            //     messageError.push(errName)
-            // }
-            // if (req.body.errPicture === "") {
-            //     messageError.push(errPicture)
-            // }
-            // if (req.body.price === "") {
-            //     messageError[errPrice] = errPrice
-            // }
-            // if (messageError.length > 0) {
-            //         req.flash("message", messageError)
-            //     return res.redirect('/admin/product/create');
-            // }
             let productNew = await ProductModel.findOne({name: req.body.name});
             if (!productNew) {
                 productNew = new ProductModel({
@@ -94,12 +73,10 @@ export class ProductController {
 
 
     static async delete(req, res) {
-
         try {
             let product = await ProductModel.findOne({_id: req.params.id});
             if (product) {
                 await product.remove();
-
                 res.redirect('/admin/product/list')
             } else {
                 //thêm chuyển qua list và thêm message err
@@ -207,6 +184,7 @@ export class ProductController {
                     break;
                 }
             }
+
             let productSave = {
                 products: produc._id,
                 quantity: quantity,
